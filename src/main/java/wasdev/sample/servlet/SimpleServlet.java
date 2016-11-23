@@ -1,6 +1,7 @@
 package wasdev.sample.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,8 @@ import com.google.gson.JsonParser;
 import com.ibm.watson.developer_cloud.language_translator.v2.LanguageTranslator;
 import com.ibm.watson.developer_cloud.language_translator.v2.model.Language;
 import com.ibm.watson.developer_cloud.language_translator.v2.model.TranslationResult;
+import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;
+import com.ibm.watson.developer_cloud.text_to_speech.v1.model.Voice;
 
 
 /**
@@ -42,9 +45,24 @@ public class SimpleServlet extends HttpServlet {
 	        response.getWriter().println(resultado);
 
 	        //Buscar servicio Text to Speech
+	        String urlServicioVoz = "https://stream.watsonplatform.net/text-to-speech/api";
+	        String passwordServicioVoz = "TVeaxrFKR35N";
+	        String userServicioVoz = "64210083-c962-4ef1-8627-74a5dbbc3b84";
 	        
 	        
-	        //Invocar servicio
+	        TextToSpeech servicioVoz = new TextToSpeech();
+	        servicioVoz.setUsernameAndPassword(userServicioVoz, passwordServicioVoz);
+
+	        List<Voice> voices = servicioVoz.getVoices().execute();
+	        System.out.println(voices);
+	        //TODO-Establecer voz
+	        
+	        //Definir audio
+	        
+	        //Sintentizar voz
+	        servicioVoz.synthesize(resultado, voices.get(1));
+	        response.getWriter().println("Ha sonado la voz");
+	        
 	        
     	}catch( Exception ex){
     		System.out.println(ex);
