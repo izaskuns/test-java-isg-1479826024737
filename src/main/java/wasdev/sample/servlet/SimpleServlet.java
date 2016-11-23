@@ -15,6 +15,7 @@ import com.ibm.watson.developer_cloud.language_translator.v2.LanguageTranslator;
 import com.ibm.watson.developer_cloud.language_translator.v2.model.Language;
 import com.ibm.watson.developer_cloud.language_translator.v2.model.TranslationResult;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;
+import com.ibm.watson.developer_cloud.text_to_speech.v1.model.AudioFormat;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.model.Voice;
 
 
@@ -60,7 +61,9 @@ public class SimpleServlet extends HttpServlet {
 	        //Definir audio
 	        
 	        //Sintentizar voz
-	        servicioVoz.synthesize(resultado, voices.get(1));
+	        //servicioVoz.synthesize(resultado, voices.get(1));
+	        AudioFormat audioFormat = new AudioFormat("audio/wav");
+	        servicioVoz.synthesize(resultado, voices.get(1), audioFormat);
 	        response.getWriter().println("Ha sonado la voz");
 	        
 	        
