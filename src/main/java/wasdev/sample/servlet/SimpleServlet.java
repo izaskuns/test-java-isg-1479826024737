@@ -28,7 +28,7 @@ public class SimpleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        response.getWriter().print("Hello World! Mi primera colonia, chispas...");
+        response.getWriter().println("Hello World! Mi primera colonia, chispas...");
         
       	try{
 	        //Buscar servicio Language Translator
@@ -36,9 +36,10 @@ public class SimpleServlet extends HttpServlet {
 	        
 	        //Traducir texto
 	        String cadenaATraducir = "The rain in Spain stays mainly on the plain";
+	        response.getWriter().println(cadenaATraducir);
 	        String resultado = traduce( servicioTraduccion, cadenaATraducir );
 	        response.setContentType("text/html");
-	        response.getWriter().print(resultado);
+	        response.getWriter().println(resultado);
 
 	        //Buscar servicio Text to Speech
 	        
